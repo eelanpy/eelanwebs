@@ -1,0 +1,67 @@
+/* Header of First Page User Enter Section */
+
+.fa-home {
+  color: black;
+}
+
+.container-fluid {
+  margin: 0;
+
+}
+
+/* Word Input Section */
+
+.input-word {
+  /* text-align: center; */
+  margin-top: 20px;
+  border: 2px solid;
+  font-size: 1.5rem;
+}
+
+/* .alert {
+  display: none;
+   margin-top: 50px;
+} */
+
+@media(max-width: 375px) {
+  .input-word {
+    margin-top: 20px;
+    border: 2px solid;
+    font-size: 2rem;
+  }
+  /* } .alert {
+    margin-top: 20px;
+    height: 2.5rem;
+    width: 2.5rem;
+  } */
+}
+
+.active {
+  display: block;
+  margin: 0;
+  width: 20%;
+  height: 20%;
+}
+
+
+.word-label {
+  font-size: 1rem;
+  padding-bottom: 0;
+}
+
+/* Word List Section */
+
+.word {
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #2D4263;
+}
+
+
+/* Alerts Section */
+
+.alert {
+text-align: center;
+margin-top: 20px;
+}
