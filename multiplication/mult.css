@@ -1,0 +1,157 @@
+/* html {
+  max-width: 1171px;
+} */
+
+
+/* Header of First Page User Enter Section */
+
+.fa-home {
+  color: black;
+}
+
+.container-fluid {
+  margin: 0;
+  /* text-align: center; */
+}
+
+.name {
+  margin-top: 20px;
+
+  border: 2px solid;
+  font-size: 1.5rem;
+  /* margin: 10em; */
+  /* text-align: right;  */
+
+}
+
+
+
+.name-label {
+  font-size: 1rem;
+  padding-bottom: 100px;
+  /* text-align: center; */
+  /* margin-bottom: 90px; */
+}
+
+
+.alert {
+  text-align: left;
+  margin-top: 2px;
+}
+
+/* Time Table User Chose Section */
+
+h1 {
+  font-family: 'Dongle', sans-serif;
+}
+
+.times-tbl-btns{
+  margin-top: 0;
+}
+
+a.btn-outline-info {
+  /* margin-top: 5rem; */
+  background-color:  #0dcaf0;
+  color: #fff;
+  border: 0;
+  width: 10rem;
+  height: 8.5rem;
+  font-size: 500%;
+  font-weight: bold;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+/* @media only screen and (max-width: 768px) {
+  .times-tbl-btns {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1em;
+    grid-row-gap: 100px;
+  }
+} */
+
+.btn-outline-secondary {
+  color:#fff;background-color:#6c757d;border-color:#6c757d
+}
+
+
+.submit-btn {
+  /* margin-right: 500%;
+  margin-top: 50px; */
+}
+
+a.btn-outline-info:hover {
+  background-color: #0d5cf0;
+  color: #fff;
+  border: 0;
+}
+
+.times-tbl-btns {
+  margin-top: 1rem;
+  margin-left: 2.5rem;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fit, 200px);
+
+}
+
+/* Question Section(no marks) */
+
+p {
+  margin-left: 20px;
+}
+
+.question{
+font-family: 'Indie Flower', cursive;
+font-size: 2em;
+}
+
+.answer-input {
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.5rem;
+  width: 3em;
+  height: 1.5em;
+}
+
+/* Marking Section */
+
+input.correct {
+  color: green;
+}
+
+input.wrong {
+  color: red;
+}
+
+
+i.correct {
+  color: green;
+  font-size: 2rem;
+}
+
+input.correct {
+  border-color: green;
+}
+
+i.wrong {
+  color: red;
+  font-size: 2rem;
+}
+
+input.wrong {
+  border-color: red;
+}
+
+
+
+.marks {
+  /* margin-top: 50px; */
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.5rem;
+  margin-left: 10px;
+  margin-right: 20px;
+  /* margin-right: 490%; */
+  font-weight: 900;
+}
