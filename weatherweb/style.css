@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.fa-home {
+  color: black;
+}
+
+#request,
+#form-city {
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
+#city-input,
+h1,
+p,
+h3 {
+  margin: 20px;
+  padding-right: 5px;
+  width: auto;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
+.btn-primary {
+  margin-left: 50%;
+}
+
+img {
+  height: 100%;
+  width: auto;
+}
+
+.citynotfoundmsg {
+  color: red;
+}
