@@ -5,6 +5,7 @@ function checkForTableClick(btns) {
       clickedBtn = true;
       document.querySelector('h4.mt-5').remove();
       document.querySelector('.times-tbl-btns').remove();
+      document.querySelector('h3').style.display = 'inline-block'
       document.querySelector('.container').innerHTML += '<span class="marks"></span><button class="submit-btn btn btn-outline-primary">Submit</button>'
       makeQuestions(btn.textContent);
     });
@@ -97,6 +98,14 @@ function makeQuestions(timeTable) {
   submitBtn.addEventListener('click', function(e) {
     checkUserAnswer(submitBtn, timeTable,questionsRandomList, document.querySelectorAll('.answer-input'));
   });
+  for(var i =0; i<document.querySelectorAll('.answer-input').length;i++){
+    document.querySelectorAll('.answer-input')[i].addEventListener('keypress', function(e) {
+      if(e.keyCode == 13) {
+          checkUserAnswer(submitBtn, timeTable,questionsRandomList, document.querySelectorAll('.answer-input'));
+      }
+
+    });
+  }
 }
 
 function getAllBtns(minNum, maxNum) {

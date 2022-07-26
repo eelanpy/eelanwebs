@@ -31,7 +31,7 @@ function letUserPick(num,randomNum) {
         1 to ${num}.</h1>
 
         <br>
-        <h3 id="pQuestion">Go ahead and guess the number. Press enter when you're done:</h3>
+        <h3 id="pQuestion">Go ahead and guess the number. Press enter or click the "Guess!" button when you typed your guess:</h3>
 
         <div class="form-signin text-center">
         <input  class="form-control text-center"
