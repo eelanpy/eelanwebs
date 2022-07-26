@@ -5,7 +5,7 @@ function checkForTableClick(btns) {
       clickedBtn = true;
       document.querySelector('h4.mt-5').remove();
       document.querySelector('.times-tbl-btns').remove();
-      document.querySelector('.container').innerHTML += '<span class="marks"></span><button class="submit-btn btn btn-dark">Submit</button>'
+      document.querySelector('.container').innerHTML += '<span class="marks"></span><button class="submit-btn btn btn-outline-primary">Submit</button>'
       makeQuestions(btn.textContent);
     });
   });

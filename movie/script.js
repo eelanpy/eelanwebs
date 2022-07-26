@@ -23,6 +23,16 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
     })
 });
 
+document.querySelector('#movie-name-input').addEventListener('keypress', (e) => {
+  if(String(e.keyCode) == '13'){
+  document.getElementsByClassName('btn')[0].click()
+}})
+
+document.querySelector('#movie-year-input').addEventListener('keypress', (e) => {
+  if(String(e.keyCode) == '13'){
+  document.getElementsByClassName('btn')[0].click()
+}})
+
 
 
 function capitalize(str) {

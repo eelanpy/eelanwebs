@@ -14,7 +14,7 @@
 .input-word {
   /* text-align: center; */
   margin-top: 20px;
-  border: 2px solid;
+  /* border: 2px solid; */
   font-size: 1.5rem;
 }
 
@@ -26,7 +26,7 @@
 @media(max-width: 375px) {
   .input-word {
     margin-top: 20px;
-    border: 2px solid;
+    /* border: 2px solid; */
     font-size: 2rem;
   }
   /* } .alert {
@@ -35,6 +35,30 @@
     width: 2.5rem;
   } */
 }
+
+.fa-home {
+    color: black;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
 
 .active {
   display: block;

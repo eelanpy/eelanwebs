@@ -1,5 +1,5 @@
 let cityInput = document.getElementById('city-input').value;
-const submitBtn = document.getElementsByClassName('btn-primary')[0];
+const submitBtn = document.getElementsByClassName('btn-outline-primary')[0];
 const divWeather = document.getElementById('weather-details')
 var country2;
 

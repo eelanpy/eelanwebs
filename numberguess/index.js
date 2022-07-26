@@ -3,7 +3,7 @@ var buttonNumsUI = document.getElementsByClassName("buttonNums")[0];
 var buttonsNumsArray = [10, 25, 50, 100, 500, 1000];
 var output = "";
 buttonsNumsArray.forEach(function (num) {
-  output += `<button id=${num} onClick="generateRandomNum(parseInt(${num}))"  class="ms-2 mt-2 p-4 btn btn-primary" style="font-size: 30px;">${num}</button>`;
+  output += `<button id=${num} onClick="generateRandomNum(parseInt(${num}))"  class="ms-2 mt-2 p-4 btn btn-outline-primary numbtn" style="font-size: 30px;">${num}</button>`;
 });
 
 buttonNumsUI.innerHTML += output;
@@ -12,35 +12,66 @@ buttonNumsUI.innerHTML += output;
 // Step 2: Defining Input box div tag.
 var inputBoxDiv = document.getElementById("userBox");
 
+var guesses = [];
 //
 // Step 3: The compunter picks a number based on the range from step 1.
 function generateRandomNum(num) {
+  guesses = [];
   randomNum = Math.floor(Math.random() * (num - 1)) + 1;
-  return letUserPick(num);
+  return letUserPick(num,randomNum);
 }
 
 //
 // Step 4: Lets the user guess the random number that the computer is thinking of.
-function letUserPick(num) {
+function letUserPick(num,randomNum) {
   var output = ``;
   output += `
-    <div id="userBox">
-      <h6>Computer will now think of a number from
-        1 to ${num}.</h6>
-        <h2 id="pQuestion" class="text-danger">Go ahead and guess the number.</h2>
+    <div id="userBox" class="text-center">
+      <h1>Computer will now think of a number from
+        1 to ${num}.</h1>
 
         <br>
-        <p id="guesses"></p>
-        <input  class="ml-2 text-danger bg-warning form-control"
-            type="text" placeholder="Press enter when done" id="userGuess"
-            onKeyPress="if (window.event.keyCode == 13) checkUserGuess(${randomNum})"
+        <h3 id="pQuestion">Go ahead and guess the number. Press enter when you're done:</h3>
+
+        <div class="form-signin text-center">
+        <input  class="form-control text-center"
+            type="text" placeholder="Your Number Guess:" id="userGuess"
+
         />
+        </div>
+        <div class="text-center">
+          <button class="btn btn-outline-primary submit-btn">Guess!</button>
+        </div>
+
+
+        <p id="guesses"></p>
     </div>`;
+
+
+
+
   inputBoxDiv.innerHTML = output;
   document.getElementById("userGuess").focus();
+  for(var i = 0; i<document.querySelectorAll('.numbtn').length; i++) {
+    document.querySelectorAll('.numbtn')[i].disabled = true;
+  }
+  document.querySelector('.form-control').addEventListener('keypress', (e) => {
+    if (window.event.keyCode == 13) {
+
+      document.querySelector('.submit-btn').click()
+    }
+  })
+
+  document.querySelector('.submit-btn').addEventListener('click', (e) => {
+
+
+      checkUserGuess(randomNum)
+
+
+  })
 }
 
-var guesses = [];
+
 var totalTries = 0;
 function checkUserGuess(randomNum) {
   totalTries = totalTries + 1;
@@ -57,7 +88,8 @@ function checkUserGuess(randomNum) {
     messageDiv.classList.add("text-success");
     messageDiv.textContent = `Yes you got it!!!  It took you ${totalTries} ${tries}. `;
     guessesP.textContent = `Also the numbers that you entered was ${guessesString}.  The correct number was ${randomNum}.`;
-    inputBoxDiv.innerHTML += `<button onclick="location.reload()" class="mt-2 bg-info btn" style="font-family: quicksand, sans-serif">Play Again</button>`;
+
+    inputBoxDiv.innerHTML += `<button onclick="location.reload()" class="mt-2 btn btn-primary " style="font-family: quicksand, sans-serif">Play Again</button>`;
     document.getElementById("userGuess").focus();
   } else if (randomNum > guessed) {
     guessed = "";
@@ -75,6 +107,7 @@ function checkUserGuess(randomNum) {
   guessesP.style.fontFamily = 'quicksand, sans-serif'
 
   document.getElementById("userGuess").value = "";
+
 }
 
 function getString(arr, finalIndex) {

@@ -113,16 +113,13 @@ $.getJSON('data.json', function(response) {
           else {
             document.querySelector('ul.possible-words').style.display = 'block';
           }
-
-
-
-
       }
-
-
-
-
-
     }
 });
 });
+
+document.querySelector('.input-word').addEventListener('keypress', (e) => {
+  if(String(e.keyCode) == '13'){
+  
+  document.querySelector('.find-words-btn').click()
+}})

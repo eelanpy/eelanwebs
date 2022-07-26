@@ -46,24 +46,32 @@ window.mobileCheck = function() {
 ;
 
 var words;
+
 $.getJSON('data.json', function(response) {
     document.querySelector('.input-word').addEventListener('keyup', function(e) {
-      document.querySelector('ul.words').innerHTML = '';
-      e.preventDefault();
-      if (e.target.value.length > 0 && /[a-zA-Z]$/.test(e.target.value) == true) {
-          const words = response;
-          var wordsList = run(e.target.value,2);
-          for(let i = 0; i<wordsList.length; i++) {
-            console.log(words.includes(wordsList[i]),wordsList[i]);
-              if(words.includes(wordsList[i])) {
-                  const word = wordsList[i][0].toUpperCase() + wordsList[i].slice(1, wordsList[i].length).toLowerCase();
-                  console.log(word);
-                  document.querySelector('.words').innerHTML += `<li class="word">${word}</li>`
-              }
+      // e.preventDefault();
+      document.querySelector('.btn-outline-primary').click()
+  })
+
+
+
+document.querySelector('.btn-outline-primary').addEventListener('click', function() {
+  document.querySelector('ul.words').innerHTML = '';
+
+  if (document.querySelector('.input-word').value.length > 0 && /[a-zA-Z]$/.test(document.querySelector('.input-word').value) == true) {
+      const words = response;
+      var wordsList = run(e.target.value,2);
+      for(let i = 0; i<wordsList.length; i++) {
+        console.log(words.includes(wordsList[i]),wordsList[i]);
+          if(words.includes(wordsList[i])) {
+              const word = wordsList[i][0].toUpperCase() + wordsList[i].slice(1, wordsList[i].length).toLowerCase();
+              console.log(word);
+              document.querySelector('.words').innerHTML += `<li class="word">${word}</li>`
           }
       }
-  })
-});
+  }
+})
+
 
 function run(string, min=2) {
 
@@ -118,3 +126,5 @@ for(let i of a) {
 newList  = new Set(newList)
 return Array.from(newList)
 }
+
+});
