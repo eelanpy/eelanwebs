@@ -10,7 +10,6 @@ function addButton(game, link) {
 	btnGame.classList.add('btn-lg');
 	btnGame.classList.add('mt-2');
 	btnGame.href = link;
-	btnGame.target = '_blank';
 	btnGame.textContent = game;
 	formSignin.appendChild(btnGame);
 }
