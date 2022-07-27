@@ -1,20 +1,23 @@
 document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
-
+  document.querySelector('.div').style.display = 'flex';
+  document.querySelector('.div').style.justifyContent = 'center';
   const movieName = document.querySelector('#movie-name-input').value
   document.querySelector('#movie-name-input').value = capitalize(document.querySelector('#movie-name-input').value);
   fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?movie=' + movieName + '&year=' + document.querySelector('#movie-year-input').value)
     .then(response => response.json())
     .then(data => {
+
       if (data.message) {
-        document.querySelector('h6').textContent = "Couldn't find movie!"
-        document.querySelector('h6').style.color = 'red';
+        document.querySelector('.text-primary').style.display = 'none';
+        document.querySelector('.wrong').textContent = "Couldn't find movie!"
+        document.querySelector('.wrong').style.color = 'red';
 
       } else {
-
-        document.querySelector('h6').textContent = 'Budget: ' + data.budget
-        document.querySelector('h6').style.color = 'black';
+        document.querySelector('.text-primary').style.display = 'none';
+        document.querySelector('.budget').textContent = 'Budget: ' + data.budget
+        document.querySelector('.budget').style.color = 'black';
         // document.querySelector('h6').style.fontSize = '2rem';
-        document.querySelectorAll('h6')[1].textContent = 'Box Office: ' + data['box-office']
+        document.querySelector('.box-office').textContent = 'Box Office: ' + data['box-office']
         document.querySelectorAll('.wiki-link')[0].href = data['wiki-link']
         document.querySelectorAll('.wiki-link')[0].text = document.querySelector('#movie-name-input').value
         document.querySelectorAll('.wiki-link')[0].target = '_blank'

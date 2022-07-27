@@ -35,7 +35,7 @@
     <h1 class="mt-5">Box Office and Budget Finder:</h1>
     <br>
     <br><br><br>
-    <h1 class="mb-3 font-weight-normal">Enter Movie Name and Year of Movie Released:</h1>
+    <h3 class="mb-3 font-weight-normal">Enter Movie Name and Year of Movie Released:</h3>
 
     <h6 class="pb-2">Press enter or click the "Search!" button when you want to search for the movie info:</h6>
     <!-- <label for="movie-name-input" class="sr-only">Movie Name:</label> -->
@@ -44,11 +44,19 @@
     <!-- <label for="movie-year-input" class="sr-only">Movie Year Released:</label> -->
     <input id="movie-year-input" class="form-control" placeholder="Movie Year Released(optionl):" required>
     <button class="btn btn-lg btn-outline-primary btn-block" type="button">Search!</button>
-    <br>
-    <br>
 
-    <h6></h6>
-    <h6></h6>
+
+      <div class="div" style="display: none;">
+      <div class="spinner-border text-primary mt-3 text-center" role="status">
+      <span class="sr-only">Loading...</div>
+      </div>
+  </div>
+
+    <br>
+    <br>
+    <h6 class="wrong"></h6>
+    <h6 class="budget"></h6>
+    <h6 class="box-office"></h6>
     <a class="wiki-link"></a>
 
   </form>
