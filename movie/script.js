@@ -1,6 +1,13 @@
 document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
   document.querySelector('.div').style.display = 'flex';
   document.querySelector('.div').style.justifyContent = 'center';
+  document.querySelector('.text-primary').style.height = '3rem';
+  document.querySelector('.text-primary').style.width = '3rem';
+  document.querySelector('.wrong').textContent = ""
+  document.querySelector('.budget').textContent = ""
+  document.querySelector('.box-office').textContent = ""
+
+
   const movieName = document.querySelector('#movie-name-input').value
   document.querySelector('#movie-name-input').value = capitalize(document.querySelector('#movie-name-input').value);
   fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?movie=' + movieName + '&year=' + document.querySelector('#movie-year-input').value)
@@ -8,12 +15,14 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
     .then(data => {
 
       if (data.message) {
-        document.querySelector('.text-primary').style.display = 'none';
+        document.querySelector('.div').style.display = 'none';
+        // document.querySelector('.div').classList.remove('show-spinner')
         document.querySelector('.wrong').textContent = "Couldn't find movie!"
         document.querySelector('.wrong').style.color = 'red';
 
       } else {
-        document.querySelector('.text-primary').style.display = 'none';
+        document.querySelector('.div').style.display = 'none';
+
         document.querySelector('.budget').textContent = 'Budget: ' + data.budget
         document.querySelector('.budget').style.color = 'black';
         // document.querySelector('h6').style.fontSize = '2rem';
@@ -27,12 +36,17 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
 });
 
 document.querySelector('#movie-name-input').addEventListener('keypress', (e) => {
+
   if(String(e.keyCode) == '13'){
+  document.querySelector('.div').style.display = 'flex';
+  document.querySelector('.div').style.justifyContent = 'center';
   document.getElementsByClassName('btn')[0].click()
 }})
 
 document.querySelector('#movie-year-input').addEventListener('keypress', (e) => {
   if(String(e.keyCode) == '13'){
+    document.querySelector('.div').style.display = 'flex';
+    document.querySelector('.div').style.justifyContent = 'center';
   document.getElementsByClassName('btn')[0].click()
 }})
 
