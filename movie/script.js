@@ -5,6 +5,8 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
   document.querySelector('.text-primary').style.width = '3rem';
   document.querySelector('.wrong').textContent = ""
   document.querySelector('.budget').textContent = ""
+  document.querySelector('.wiki-link').textContent = ""
+  document.querySelector('.wiki-link').href = ""
   document.querySelector('.box-office').textContent = ""
 
 
