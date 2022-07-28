@@ -1,6 +1,7 @@
 const formSignin = document.querySelector('.container');
 
-formSignin.innerHTML = '';
+formSignin.innerHTML = ``;
+
 
 function addButton(game, link) {
 	const btnGame = document.createElement('a');

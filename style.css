@@ -62,7 +62,7 @@ body {
 
 }
 
-@media (max-width: 375px) {
+@media (vw: 375px) {
   body {
     display: -ms-flexbox;
     display: -webkit-box;
