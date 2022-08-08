@@ -1,5 +1,6 @@
 document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
   document.querySelector('.div').style.display = 'flex';
+  document.querySelector('.div').textContent = '';
   document.querySelector('.div').style.justifyContent = 'center';
   document.querySelector('.text-primary').style.height = '3rem';
   document.querySelector('.text-primary').style.width = '3rem';
@@ -60,14 +61,14 @@ function putData(data) {
     document.querySelector('.wrong').style.color = 'red';
 
   } else {
-    document.querySelector('.div').textContent = data['budget'];
+
 
     document.querySelector('.budget').textContent = 'Budget: ' + data['budget']
     document.querySelector('.budget').style.color = 'black';
     // document.querySelector('h6').style.fontSize = '2rem';
     document.querySelector('.box-office').textContent = 'Box Office: ' + data['box-office']
     document.querySelectorAll('.wiki-link')[0].href = data['wiki-link']
-    document.querySelectorAll('.wiki-link')[0].text = document.querySelector('#movie-name-input').value
+    document.querySelectorAll('.wiki-link')[0].text = data['name']
     document.querySelectorAll('.wiki-link')[0].target = '_blank'
   }
 }
