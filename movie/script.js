@@ -1,6 +1,6 @@
 document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
   document.querySelector('.div').style.display = 'flex';
-  document.querySelector('.div').textContent = '';
+//   document.querySelector('.div').textContent = '';
   document.querySelector('.div').style.justifyContent = 'center';
   document.querySelector('.text-primary').style.height = '3rem';
   document.querySelector('.text-primary').style.width = '3rem';
