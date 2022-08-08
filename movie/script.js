@@ -61,8 +61,7 @@ function putData(data) {
     document.querySelector('.wrong').style.color = 'red';
 
   } else {
-
-
+    document.querySelector('.div').style.display = 'none';
     document.querySelector('.budget').textContent = 'Budget: ' + data['budget']
     document.querySelector('.budget').style.color = 'black';
     // document.querySelector('h6').style.fontSize = '2rem';
