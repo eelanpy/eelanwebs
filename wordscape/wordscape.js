@@ -60,7 +60,7 @@ document.querySelector('.btn-outline-primary').addEventListener('click', functio
 
   if (document.querySelector('.input-word').value.length > 0 && /[a-zA-Z]$/.test(document.querySelector('.input-word').value) == true) {
       const words = response;
-      var wordsList = run(e.target.value,2);
+      var wordsList = run(document.querySelector('.input-word').value,2);
       for(let i = 0; i<wordsList.length; i++) {
         console.log(words.includes(wordsList[i]),wordsList[i]);
           if(words.includes(wordsList[i])) {
