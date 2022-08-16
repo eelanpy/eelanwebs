@@ -1,6 +1,7 @@
+document.querySelector('input').autofocus = true;
+
 document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
   document.querySelector('.div').style.display = 'flex';
-//   document.querySelector('.div').textContent = '';
   document.querySelector('.div').style.justifyContent = 'center';
   document.querySelector('.text-primary').style.height = '3rem';
   document.querySelector('.text-primary').style.width = '3rem';
@@ -9,36 +10,100 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
   document.querySelector('.wiki-link').textContent = ""
   document.querySelector('.wiki-link').href = ""
   document.querySelector('.box-office').textContent = ""
+  document.querySelector('.more-info-text').textContent = "";
 
 
   const movieName = document.querySelector('#movie-name-input').value
-  document.querySelector('#movie-name-input').value = capitalize(document.querySelector('#movie-name-input').value);
-  fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?movie=' + movieName + '&year=' + document.querySelector('#movie-year-input').value)
-    .then(response => response.json())
+  inputWords = movieName.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '');
+
+  // var result = '';
+  url = 'movies.json'
+  var matched = []
+  fetch(url)
+    .then(res => res.json())
     .then(data => {
-      putData(data)
+      // console.log('\nDid you mean?: ')
 
 
-    })
+
+      for (i of Object.keys(data)) {
+        // console.log(data[i])
+        for (j in data[i]) {
+          const movieName = j.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '');
+          if (movieName.includes(inputWords) == true) {
+            // matched.push(j + ': ' + data[i][j])
+            matched.push(`<button id=${data[i][j]} class="btn btn-primary movie-btn ml-0">${j}</button>`)
+          }
+        }
+      }
+      matched = new Set(matched)
+      matched = Array.from(matched).sort()
+      if (matched.length > 1) {
+        document.querySelector('.movies').innerHTML = '';
+        document.querySelector('.div').style.display = 'none';
+        matched.forEach(element => {
+
+          document.querySelector('.movies').innerHTML += `<li class="list-group-item">${element}</li>`;
+
+          Array.from(document.querySelectorAll('button.movie-btn')).forEach(movieBtn => {
+            movieBtn.addEventListener('click', (e) => {
+              e.preventDefault()
+              document.querySelector('.div').style.display = 'flex';
+              document.querySelector('.div').style.justifyContent = 'center';
+              document.querySelector('.text-primary').style.height = '3rem';
+              document.querySelector('.text-primary').style.width = '3rem';
+
+              let movie_link = movieBtn.id;
+
+              document.querySelector('.movies').innerHTML = '';
+              document.querySelector('#movie-name-input').value = capitalize(document.querySelector('#movie-name-input').value);
+              fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + movie_link)
+                .then(response => response.json())
+                .then(data => {
+
+                  putData(data)
+                });
+
+            })
+          })
+        });
+      } else if (matched.length == 0) {
+        document.querySelector('.div').style.display = 'none';
+
+        document.querySelector('.wrong').textContent = "Couldn't find movie!"
+        document.querySelector('.wrong').style.color = 'red';
+      }
+      else {
+        document.querySelector('.movies').innerHTML = '';
+        document.querySelector('#movie-name-input').value = capitalize(document.querySelector('#movie-name-input').value);
+        fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + matched[0].split(' class=')[0].split('id=')[1])
+          .then(response => response.json())
+          .then(data => {
+            putData(data)
+          });
+
+      }
+    });
 });
 
-document.querySelector('#movie-name-input').addEventListener('keypress', (e) => {
 
-  if(e.keyCode == 13) {
+
+
+
+
+
+document.querySelector('body').addEventListener('keypress', (e) => {
+
+  if (e.keyCode == 13 && e.target.value != '') {
+
     e.preventDefault()
-  document.querySelector('.div').style.display = 'flex';
-  document.querySelector('.div').style.justifyContent = 'center';
-  document.getElementsByClassName('btn')[0].click()
-}})
-
-document.querySelector('#movie-year-input').addEventListener('keypress', (e) => {
-
-  if(e.keyCode == 13){
-    e.preventDefault()
+    document.querySelector('.movies').innerHTML = '';
     document.querySelector('.div').style.display = 'flex';
     document.querySelector('.div').style.justifyContent = 'center';
-  document.getElementsByClassName('btn')[0].click()
-}})
+    document.getElementsByClassName('btn')[0].click()
+  }
+})
+
 
 
 
@@ -64,10 +129,10 @@ function putData(data) {
     document.querySelector('.div').style.display = 'none';
     document.querySelector('.budget').textContent = 'Budget: ' + data['budget']
     document.querySelector('.budget').style.color = 'black';
-    // document.querySelector('h6').style.fontSize = '2rem';
-    document.querySelector('.box-office').textContent = 'Box Office: ' + data['box-office']
-    document.querySelectorAll('.wiki-link')[0].href = data['wiki-link']
-    document.querySelectorAll('.wiki-link')[0].text = data['name']
+    document.querySelector('.box-office').textContent = 'Box Office: ' + data['box_office']
+    document.querySelector('.more-info-text').textContent = "For more information:";
+    document.querySelectorAll('.wiki-link')[0].href = data['wiki_link']
+    document.querySelectorAll('.wiki-link')[0].text = data['movie_name']
     document.querySelectorAll('.wiki-link')[0].target = '_blank'
   }
 }
