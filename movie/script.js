@@ -79,7 +79,7 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
       }
       else {
         document.querySelector('.movies').innerHTML = '';
-        document.querySelector('#movie-name-input').value = capitalize(document.querySelector('#movie-name-input').value);
+
         fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + matched[0].split(' class=')[0].split('id=')[1])
           .then(response => response.json())
           .then(data => {
@@ -130,6 +130,7 @@ function putData(data) {
     document.querySelector('.wrong').style.color = 'red';
 
   } else {
+    document.querySelector('#movie-name-input').value = data['movie_name'];
     document.querySelector('.div').style.display = 'none';
     document.querySelector('.budget').textContent = 'Budget: ' + data['budget']
     document.querySelector('.budget').style.color = 'black';
