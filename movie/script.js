@@ -129,7 +129,7 @@ function putData(data) {
     document.querySelector('.div').style.display = 'none';
     document.querySelector('.budget').textContent = 'Budget: ' + data['budget']
     document.querySelector('.budget').style.color = 'black';
-    document.querySelector('.box-office').textContent = 'Box Office: ' + data['box_office']
+    document.querySelector('.box-office').textContent = 'Box Office: ' + data['box-office']
     document.querySelector('.more-info-text').textContent = "For more information:";
     document.querySelectorAll('.wiki-link')[0].href = data['wiki_link']
     document.querySelectorAll('.wiki-link')[0].text = data['movie_name']
