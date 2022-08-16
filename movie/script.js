@@ -37,7 +37,11 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
         }
       }
       matched = new Set(matched)
-      matched = Array.from(matched).sort()
+
+      matched = Array.from(matched)
+      matched.sort(function (a, b) {
+        return a.length - b.length || a.localeCompare(b)
+      })
       if (matched.length > 1) {
         document.querySelector('.movies').innerHTML = '';
         document.querySelector('.div').style.display = 'none';
