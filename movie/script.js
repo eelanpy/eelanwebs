@@ -60,7 +60,7 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
               let movie_link = movieBtn.id;
 
               document.querySelector('.movies').innerHTML = '';
-              document.querySelector('#movie-name-input').value = capitalize(document.querySelector('#movie-name-input').value);
+              document.querySelector('#movie-name-input').value = movieBtn.textContent;
               fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + movie_link)
                 .then(response => response.json())
                 .then(data => {
