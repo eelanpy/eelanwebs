@@ -75,6 +75,7 @@ function letUserPick(num, randomNum) {
       document.getElementById("wrong").textContent = 'Try Again! Reason: You did not put a number.'
       document.getElementById("wrong").classList.add('text-danger')
 
+
     }
 
 
@@ -86,13 +87,18 @@ function letUserPick(num, randomNum) {
 var guesses = [];
 var totalTries = 0;
 function checkUserGuess(randomNum) {
+  document.getElementById("wrong").textContent = '';
+  document.getElementById("wrong").classList.remove('text-danger');
+
   document.querySelector('ul#guesses').innerHTML = '';
   totalTries = totalTries + 1;
   var tries = totalTries === 1 ? "try" : "tries";
   let guessed = parseInt(document.getElementById("userGuess").value);
   guesses.push(guessed);
 
-  guesses = Array.from(guesses)
+  guesses2 = new Set(guesses)
+
+  guesses = Array.from(guesses2)
 
 
 
