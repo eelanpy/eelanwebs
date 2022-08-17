@@ -19,75 +19,69 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
   // var result = '';
   url = 'movies.json'
   var matched = []
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      // console.log('\nDid you mean?: ')
-
-
-
-      for (i of Object.keys(data)) {
-        // console.log(data[i])
-        for (j in data[i]) {
-          const movieName = j.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '');
-          if (movieName.includes(inputWords) == true) {
-            // matched.push(j + ': ' + data[i][j])
-            matched.push(`<button id=${data[i][j]} class="btn btn-primary movie-btn ml-0">${j}</button>`)
-          }
+  $.getJSON('https://raw.githubusercontent.com/eelanpy/datasets/main/movies.json', function (data) {
+    for (i of Object.keys(data)) {
+      // console.log(data[i])
+      for (j in data[i]) {
+        const movieName = j.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '');
+        if (movieName.includes(inputWords) == true) {
+          // matched.push(j + ': ' + data[i][j])
+          matched.push(`<button id=${data[i][j]} class="btn btn-primary movie-btn ml-0">${j}</button>`)
         }
       }
-      matched = new Set(matched)
+    }
+    matched = new Set(matched)
 
-      matched = Array.from(matched)
-      matched.sort(function (a, b) {
-        return a.length - b.length || a.localeCompare(b)
-      })
-      if (matched.length > 1) {
-        document.querySelector('.movies').innerHTML = '';
-        document.querySelector('.div').style.display = 'none';
-        matched.forEach(element => {
+    matched = Array.from(matched)
+    matched.sort(function (a, b) {
+      return a.length - b.length || a.localeCompare(b)
+    })
+    if (matched.length > 1) {
+      document.querySelector('.movies').innerHTML = '';
+      document.querySelector('.div').style.display = 'none';
+      matched.forEach(element => {
 
-          document.querySelector('.movies').innerHTML += `<li class="list-group-item">${element}</li>`;
+        document.querySelector('.movies').innerHTML += `<li class="list-group-item">${element}</li>`;
 
-          Array.from(document.querySelectorAll('button.movie-btn')).forEach(movieBtn => {
-            movieBtn.addEventListener('click', (e) => {
-              e.preventDefault()
-              document.querySelector('.div').style.display = 'flex';
-              document.querySelector('.div').style.justifyContent = 'center';
-              document.querySelector('.text-primary').style.height = '3rem';
-              document.querySelector('.text-primary').style.width = '3rem';
+        Array.from(document.querySelectorAll('button.movie-btn')).forEach(movieBtn => {
+          movieBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            document.querySelector('.div').style.display = 'flex';
+            document.querySelector('.div').style.justifyContent = 'center';
+            document.querySelector('.text-primary').style.height = '3rem';
+            document.querySelector('.text-primary').style.width = '3rem';
 
-              let movie_link = movieBtn.id;
+            let movie_link = movieBtn.id;
 
-              document.querySelector('.movies').innerHTML = '';
-              document.querySelector('#movie-name-input').value = movieBtn.textContent;
-              fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + movie_link)
-                .then(response => response.json())
-                .then(data => {
+            document.querySelector('.movies').innerHTML = '';
+            document.querySelector('#movie-name-input').value = movieBtn.textContent;
+            fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + movie_link)
+              .then(response => response.json())
+              .then(data => {
 
-                  putData(data)
-                });
+                putData(data)
+              });
 
-            })
           })
+        })
+      });
+    } else if (matched.length == 0) {
+      document.querySelector('.div').style.display = 'none';
+
+      document.querySelector('.wrong').textContent = "Couldn't find movie!"
+      document.querySelector('.wrong').style.color = 'red';
+    }
+    else {
+      document.querySelector('.movies').innerHTML = '';
+
+      fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + matched[0].split(' class=')[0].split('id=')[1])
+        .then(response => response.json())
+        .then(data => {
+          putData(data)
         });
-      } else if (matched.length == 0) {
-        document.querySelector('.div').style.display = 'none';
 
-        document.querySelector('.wrong').textContent = "Couldn't find movie!"
-        document.querySelector('.wrong').style.color = 'red';
-      }
-      else {
-        document.querySelector('.movies').innerHTML = '';
-
-        fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + matched[0].split(' class=')[0].split('id=')[1])
-          .then(response => response.json())
-          .then(data => {
-            putData(data)
-          });
-
-      }
-    });
+    }
+  });
 });
 
 
@@ -141,3 +135,6 @@ function putData(data) {
     document.querySelectorAll('.wiki-link')[0].target = '_blank'
   }
 }
+
+
+
