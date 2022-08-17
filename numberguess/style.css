@@ -1,5 +1,5 @@
 .fa-home {
-    color: black;
+  color: black;
 }
 
 .form-signin {
@@ -19,4 +19,22 @@
 
 .form-signin .form-control:focus {
   z-index: 2;
+}
+
+li.wrong-num {
+  padding: 0;
+  text-align: left;
+  font-size: 1.75rem;
+  color: red;
+}
+
+li.correct-num {
+  padding: 0;
+  text-align: left;
+  font-size: 1.75rem;
+  color: green;
+}
+
+i {
+  margin-left: 1rem;
 }
