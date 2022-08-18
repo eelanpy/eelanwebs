@@ -18,7 +18,7 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
 
   // var result = '';
   url = 'movies.json'
-  url = 'https://eelanpy1.s3.us-east-2.amazonaws.com/movies.json'
+  url = 'https://eelanpy1.s3.us-east-2.amazonaws.com/movies2.json'
 
   var matched = []
   $.getJSON(url, function (data) {
