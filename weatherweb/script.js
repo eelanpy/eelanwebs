@@ -13,15 +13,15 @@ submitBtn.addEventListener('click', () => {
   cityInput = cityInput.toLowerCase().split(',')[0]
   fetch('https://api.openweathermap.org/geo/1.0/direct?q=' + cityInput.toLowerCase() + '&appid=daa772f5693c7cb6303ee768a285ab75')
     .then(response => response.json())
-    .then(data =>  {
+    .then(data => {
       getWeatherData(data)
     })
 
 
-    });
+});
 
 
-document.querySelector('#city-input').addEventListener("keypress", function(event) {
+document.querySelector('#city-input').addEventListener("keypress", function (event) {
   // If the user presses the "Enter" key on the keyboard
   if (event.key === "Enter") {
     // Cancel the default action, if needed
@@ -32,41 +32,44 @@ document.querySelector('#city-input').addEventListener("keypress", function(even
 });
 
 function getWeatherData(data) {
-
-if (data == false) {
-  const cityNotFoundMsg = document.createElement('p');
-  cityNotFoundMsg.classList.add('citynotfoundmsg');
-  cityNotFoundMsg.textContent = 'City not found! Please type a valid city!';
-  divWeather.appendChild(cityNotFoundMsg)
-  } else {
+  try {
+    console.log(data[0].name)
 
     fetch('https://restcountries.com/v3.1/all')
-    .then(response => response.json())
-    .then(data3 =>  {
-      var country = {};
-      for(var i = 0; i<data3.length; i++) {
+      .then(response => response.json())
+      .then(data3 => {
+        var country = {};
+        for (var i = 0; i < data3.length; i++) {
 
           country[data3[i]['cca2']] = data3[i]['name']['official'];
-      }
-      // getCountryFull()
-      const country2 = country[data[0].country];
+        }
+        // getCountryFull()
+        const country2 = country[data[0].country];
 
-      const city = data[0].name + ', ' + data[0].state + ', ' + titleCase(country2)
-      console.log(city);
-      const lat = data[0].lat;
-      const lon = data[0].lon;
+        const city = data[0].name + ', ' + data[0].state + ', ' + titleCase(country2)
+        console.log(city);
+        const lat = data[0].lat;
+        const lon = data[0].lon;
         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=daa772f5693c7cb6303ee768a285ab75&units=metric`)
           .then(response => response.json())
-          .then(data2 =>  {
-            putWeatherData(data2,city)
+          .then(data2 => {
+            putWeatherData(data2, city)
           });
 
 
 
-    });
-
+      });
+  } catch {
+    const cityNotFoundMsg = document.createElement('p');
+    cityNotFoundMsg.classList.add('citynotfoundmsg');
+    cityNotFoundMsg.textContent = 'City not found! Please type a valid city!';
+    divWeather.appendChild(cityNotFoundMsg)
+    setTimeout(() => {
+      divWeather.removeChild(document.querySelector('.citynotfoundmsg'))
+    }, 5000)
   }
 }
+
 
 
 
@@ -99,14 +102,14 @@ function putWeatherData(data2, city) {
 }
 
 function titleCase(str) {
-   var splitStr = str.toLowerCase().split(' ');
-   for (var i = 0; i < splitStr.length; i++) {
-       // You do not need to check if i is larger than splitStr length, as your for does that for you
-       // Assign it back to the array
-       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-   }
-   // Directly return the joined string
-   return splitStr.join(' ');
+  var splitStr = str.toLowerCase().split(' ');
+  for (var i = 0; i < splitStr.length; i++) {
+    // You do not need to check if i is larger than splitStr length, as your for does that for you
+    // Assign it back to the array
+    splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+  }
+  // Directly return the joined string
+  return splitStr.join(' ');
 }
 
 
@@ -116,9 +119,9 @@ function getCountryFull(cc) {
   var country = {};
 
   console.log(cc);
-console.log(returnCountryFull(country,cc));
+  console.log(returnCountryFull(country, cc));
 }
 
-function returnCountryFull(country,cc) {
+function returnCountryFull(country, cc) {
   return country
 }
