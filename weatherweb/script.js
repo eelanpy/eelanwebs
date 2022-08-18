@@ -5,6 +5,7 @@ var country2;
 
 
 submitBtn.addEventListener('click', () => {
+  document.querySelector('.div').style.display = 'block';
   divWeather.innerHTML = '';
 
   cityInput = document.getElementById('city-input').value
@@ -64,6 +65,7 @@ function getWeatherData(data) {
     cityNotFoundMsg.classList.add('citynotfoundmsg');
     cityNotFoundMsg.textContent = 'City not found! Please type a valid city!';
     divWeather.appendChild(cityNotFoundMsg)
+    document.querySelector('.div').style.display = 'none';
     setTimeout(() => {
       divWeather.removeChild(document.querySelector('.citynotfoundmsg'))
     }, 5000)
@@ -98,6 +100,7 @@ function putWeatherData(data2, city) {
   divWeather.appendChild(imgElement);
   divWeather.appendChild(temperatureElement);
   divWeather.appendChild(descElement);
+  document.querySelector('.div').style.display = 'none';
 
 }
 
