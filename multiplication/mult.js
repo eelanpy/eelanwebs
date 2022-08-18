@@ -108,7 +108,11 @@ function makeQuestions(timeTable) {
     for (i of userInputs) {
       if (e.keyCode == 13) {
         if (i.value.length > 0) {
+
           matched.push(i.value)
+          if (matched.length < 12) {
+            userInputs[Array.from(userInputs).indexOf(i) + 1].focus()
+          }
         }
       }
 
