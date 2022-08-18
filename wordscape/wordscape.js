@@ -70,7 +70,7 @@ $.getJSON('data.json', function (response) {
       var wordsList = run(document.querySelector('.input-word').value, 2);
       for (let i = 0; i < wordsList.length; i++) {
         console.log(words.includes(wordsList[i]), wordsList[i]);
-        if (words.includes(wordsList[i])) {
+        if (words.includes(wordsList[i]) && wordsList[i].length >= 3) {
           matched.push(wordsList[i])
           const word = wordsList[i][0].toUpperCase() + wordsList[i].slice(1, wordsList[i].length).toLowerCase();
           console.log(word);
@@ -83,6 +83,13 @@ $.getJSON('data.json', function (response) {
         document.querySelector('.no-words').innerHTML = `<p class="text-danger">Couldn't find words for ${document.querySelector('.input-word').value}!</p>`
         document.querySelector('.div').style.display = 'none';
       } else {
+        document.querySelector('.words').innerHTML = '';
+        matched.sort(function (a, b) {
+          return b.length - a.length || b.localeCompare(alert)
+        })
+        for (word of matched) {
+          document.querySelector('.words').innerHTML += `<li class="word">${word}</li>`
+        }
         document.querySelector('.div').style.display = 'none';
       }
 
