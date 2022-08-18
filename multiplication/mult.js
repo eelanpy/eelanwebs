@@ -97,8 +97,28 @@ function makeQuestions(timeTable) {
   userInputs[0].focus()
   const submitBtn = document.querySelector('.submit-btn');
   submitBtn.addEventListener('click', function (e) {
-    checkUserAnswer(submitBtn, timeTable, questionsRandomList, document.querySelectorAll('.answer-input'));
-  });
+    let matched = [];
+    for (i of userInputs) {
+
+      if (i.value.length != '') {
+
+        matched.push(i.value)
+        if (matched.length < 12) {
+          userInputs[Array.from(userInputs).indexOf(i) + 1].focus()
+        }
+      }
+
+
+    }
+
+
+
+
+    if (matched.length == userInputs.length) {
+      checkUserAnswer(submitBtn, timeTable, questionsRandomList, userInputs);
+    }
+  })
+
 
 
 
@@ -212,11 +232,16 @@ function displayAverage(numOfCorrect) {
     averageEl.textContent = 'Average: ' + average + '% (B)';
     averageEl.classList.add('text-success');
 
-  } else if (average < 90) {
+  } else if (average <= 90) {
+    averageEl.textContent = 'Average: ' + average + '% (A-)';
+    averageEl.classList.add('text-success');
+
+  } else if (average > 90 && average <= 95) {
     averageEl.textContent = 'Average: ' + average + '% (A)';
     averageEl.classList.add('text-success');
 
-  } else if (average >= 90) {
+  }
+  else {
     averageEl.textContent = 'Average: ' + average + '% (A+)';
     averageEl.classList.add('text-success');
   }
