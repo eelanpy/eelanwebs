@@ -49,9 +49,12 @@ var words;
 
 $.getJSON('data.json', function (response) {
   document.querySelector('.input-word').addEventListener('keyup', function (e) {
+    document.querySelector('.no-words').textContent = '';
     // e.preventDefault();
     if (e.keyCode == 13) {
+      document.querySelector('.div').style.display = 'block';
       document.querySelector('.btn-outline-primary').click()
+
     }
 
   })
@@ -60,18 +63,29 @@ $.getJSON('data.json', function (response) {
 
   document.querySelector('.btn-outline-primary').addEventListener('click', function () {
     document.querySelector('ul.words').innerHTML = '';
-
+    var matched = []
     if (document.querySelector('.input-word').value.length > 0 && /[a-zA-Z]$/.test(document.querySelector('.input-word').value) == true) {
       const words = response;
+
       var wordsList = run(document.querySelector('.input-word').value, 2);
       for (let i = 0; i < wordsList.length; i++) {
         console.log(words.includes(wordsList[i]), wordsList[i]);
         if (words.includes(wordsList[i])) {
+          matched.push(wordsList[i])
           const word = wordsList[i][0].toUpperCase() + wordsList[i].slice(1, wordsList[i].length).toLowerCase();
           console.log(word);
           document.querySelector('.words').innerHTML += `<li class="word">${word}</li>`
+
         }
+
       }
+      if (matched.length <= 0) {
+        document.querySelector('.no-words').innerHTML = `<p class="text-danger">Couldn't find words for ${document.querySelector('.input-word').value}!</p>`
+        document.querySelector('.div').style.display = 'none';
+      } else {
+        document.querySelector('.div').style.display = 'none';
+      }
+
     }
   })
 
