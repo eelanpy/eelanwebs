@@ -18,8 +18,10 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
 
   // var result = '';
   url = 'movies.json'
+  url = 'https://eelanpy1.s3.us-east-2.amazonaws.com/movies.json'
+
   var matched = []
-  $.getJSON('https://raw.githubusercontent.com/eelanpy/datasets/main/movies.json', function (data) {
+  $.getJSON(url, function (data) {
     for (i of Object.keys(data)) {
       // console.log(data[i])
       for (j in data[i]) {
@@ -138,3 +140,7 @@ function putData(data) {
 
 
 
+
+// $.getJSON('https://eelanpy1.s3.us-east-2.amazonaws.com/movies.json', function (data) {
+//   console.log(data);
+// })
