@@ -27,11 +27,10 @@ function letUserPick(num, randomNum) {
   var output = ``;
   output += `
     <div id="userBox" class="text-center">
-      <h1>Computer will now think of a number from
-        1 to ${num}.</h1>
+
 
         <br>
-        <h3 id="pQuestion">Go ahead and guess the number. Press enter or click the "Guess!" button when you typed your guess:</h3>
+        <h3 id="pQuestion">Guess the number between 1 to ${num}:</h3>
         <h3 id="wrong"></h3>
         <div class="form-signin text-center" style="display: inline-block;">
         
@@ -129,8 +128,14 @@ function checkUserGuess(randomNum) {
     }
 
 
-    document.querySelector('.submit-btn').style.display = 'none';
-    inputBoxDiv.innerHTML += `<button onclick="location.reload()" class="mt-2 btn btn-primary " style="font-family: quicksand, sans-serif">Play Again</button>`;
+    // document.querySelector('.submit-btn').style.display = 'none';
+    document.querySelector('.submit-btn').textContent = 'Play Again'
+    document.querySelector('.submit-btn').addEventListener('click', () => {
+      location.reload()
+    })
+
+
+
     document.getElementById("userGuess").focus();
   } else if (randomNum > guessed) {
     guessed = "";
