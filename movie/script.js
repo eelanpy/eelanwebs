@@ -126,15 +126,29 @@ function putData(data) {
     document.querySelector('.wrong').style.color = 'red';
 
   } else {
-    document.querySelector('#movie-name-input').value = data['movie_name'];
-    document.querySelector('.div').style.display = 'none';
-    document.querySelector('.budget').textContent = 'Budget: ' + data['budget']
-    document.querySelector('.budget').style.color = 'black';
-    document.querySelector('.box-office').textContent = 'Box Office: ' + data['box-office']
-    document.querySelector('.more-info-text').textContent = "For more information:";
-    document.querySelectorAll('.wiki-link')[0].href = data['wiki_link']
-    document.querySelectorAll('.wiki-link')[0].text = data['movie_name']
-    document.querySelectorAll('.wiki-link')[0].target = '_blank'
+    if (data['budget'] != 'Not Available' && data['box-office'] != 'Not Available') {
+      document.querySelector('#movie-name-input').value = data['movie_name'].split('(')[0];
+      document.querySelector('.div').style.display = 'none';
+      document.querySelector('.budget').textContent = 'Budget: ' + data['budget'].split('(')[0]
+      document.querySelector('.budget').style.color = 'black';
+      document.querySelector('.box-office').textContent = 'Box Office: ' + data['box-office'].split('(')[0]
+      document.querySelector('.more-info-text').textContent = "For more information:";
+      document.querySelectorAll('.wiki-link')[0].href = data['wiki_link']
+      document.querySelectorAll('.wiki-link')[0].text = data['movie_name']
+      document.querySelectorAll('.wiki-link')[0].target = '_blank'
+    } else {
+      document.querySelector('.div').style.display = 'none';
+      // document.querySelector('.div').classList.remove('show-spinner')
+      document.querySelector('.wrong').textContent = "Couldn't find info for this movie!"
+      document.querySelector('.wrong').style.color = 'red';
+      document.querySelector('.budget').textContent = ''
+
+      document.querySelector('.box-office').textContent = ''
+      document.querySelector('.more-info-text').textContent = "";
+      document.querySelectorAll('.wiki-link')[0].href = ''
+      document.querySelectorAll('.wiki-link')[0].text = ''
+
+    }
   }
 }
 
