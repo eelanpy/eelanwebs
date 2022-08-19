@@ -14,7 +14,8 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
 
 
   var movieName = document.querySelector('#movie-name-input').value
-  var inputWords = movieName.toLowerCase().replace(/"/g, "").replace(/'/g, "").replace(/\(|_\)/g, "").replace('-', "").replace(')', "").replace(" ", "").replace(" ", "");
+  var inputWords = movieName.toLowerCase().replace(/"/g, "").replace(/'/g, "").replace(/\(|_\)/g, "").replace('-', "").replace(')', "").replace(" ", "").replace(" ", "").replace("(", "");
+  inputWords = inputWords.replace(' ', '')
   url = 'https://eelanpy1.s3.us-east-2.amazonaws.com/movies.json'
   var matched = []
   fetch(url)
@@ -23,11 +24,12 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
       for (i of Object.keys(data)) {
 
         for (j in data[i]) {
-          movieName = j.toLowerCase().replace(/"/g, "").replace(/'/g, "").replace(/\(|_\)/g, "").replace('-', "").replace(')', "").replace(" ", "").replace(" ", "");
+          movieName = j.toLowerCase().replace(/"/g, "").replace(/'/g, "").replace(/\(|_\)/g, "").replace('-', "").replace(')', "").replace("(", "");
 
-
+          movieName = movieName.replace(" ", "").replace(" ", "")
 
           if (movieName.includes(inputWords) == true) {
+            
             matched.push(`<button id=${data[i][j]} class="btn btn-primary movie-btn ml-0">${j}</button>`)
           }
         }
@@ -74,9 +76,11 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
         document.querySelector('.wrong').style.color = 'red';
       }
       else {
+        let movie_link = matched[0].split('id=')[1].split(' ')[0];
+        let movieName = matched[0].split('>')[1].split('<')[0];
         document.querySelector('.movies').innerHTML = '';
 
-        fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + matched[0].split(' class=')[0].split('id=')[1])
+        fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + movie_link + '&name=' + movieName)
           .then(response => response.json())
           .then(data => {
             putData(data)
