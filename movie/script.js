@@ -14,26 +14,20 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
 
 
   var movieName = document.querySelector('#movie-name-input').value
-  var inputWords = movieName.toLowerCase().replace(/"/g, "").replace(/'/g, "").replace(/\(|_\)/g, "").replace('-',"").replace(')', "").replace(" ","").replace(" ","");
-
-  // var result = '';
+  var inputWords = movieName.toLowerCase().replace(/"/g, "").replace(/'/g, "").replace(/\(|_\)/g, "").replace('-', "").replace(')', "").replace(" ", "").replace(" ", "");
   url = 'https://eelanpy1.s3.us-east-2.amazonaws.com/movies.json'
   var matched = []
   fetch(url)
     .then(res => res.json())
     .then(data => {
-      // console.log('\nDid you mean?: ')
-
-
-
       for (i of Object.keys(data)) {
-        // console.log(data[i])
+
         for (j in data[i]) {
-          movieName = j.toLowerCase().replace(/"/g, "").replace(/'/g, "").replace(/\(|_\)/g, "").replace('-',"").replace(')', "").replace(" ","").replace(" ","");
+          movieName = j.toLowerCase().replace(/"/g, "").replace(/'/g, "").replace(/\(|_\)/g, "").replace('-', "").replace(')', "").replace(" ", "").replace(" ", "");
 
 
 
-          if (movieName.includes(inputWords) == true) {            
+          if (movieName.includes(inputWords) == true) {
             matched.push(`<button id=${data[i][j]} class="btn btn-primary movie-btn ml-0">${j}</button>`)
           }
         }
@@ -48,7 +42,7 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
         document.querySelector('.movies').innerHTML = '';
         document.querySelector('.div').style.display = 'none';
         matched.forEach(element => {
-          
+
           document.querySelector('.movies').innerHTML += `<li class="list-group-item">${element}</li>`;
 
           Array.from(document.querySelectorAll('button.movie-btn')).forEach(movieBtn => {
@@ -127,31 +121,30 @@ function capitalize(str) {
 function putData(data) {
   if (data.message) {
     document.querySelector('.div').style.display = 'none';
-    // document.querySelector('.div').classList.remove('show-spinner')
     document.querySelector('.wrong').textContent = "Couldn't find movie!"
     document.querySelector('.wrong').style.color = 'red';
 
   } else {
     if (data['budget'].toLowerCase().includes('availab') == true && data['box-office'].toLowerCase().includes('availab') == true) {
       document.querySelector('.div').style.display = 'none';
-    // document.querySelector('.div').classList.remove('show-spinner')
-    document.querySelector('.wrong').innerHTML = "Couldn't find info for this movie! <br><br>But found the wiki link:"
-    document.querySelector('.wrong').style.color = 'red';
-    document.querySelectorAll('.wiki-link')[0].href = data['wiki_link']
-    document.querySelectorAll('.wiki-link')[0].text = data['movie_name']
-    document.querySelectorAll('.wiki-link')[0].target = '_blank'
-  
-  } else {
       document.querySelector('#movie-name-input').value = data['movie_name'];
-    document.querySelector('.div').style.display = 'none';
-    document.querySelector('.budget').textContent = 'Budget: ' + data['budget']
-    document.querySelector('.budget').style.color = 'black';
-    document.querySelector('.box-office').textContent = 'Box Office: ' + data['box-office']
-    document.querySelector('.more-info-text').textContent = "For more information:";
-    document.querySelectorAll('.wiki-link')[0].href = data['wiki_link']
-    document.querySelectorAll('.wiki-link')[0].text = data['movie_name']
-    document.querySelectorAll('.wiki-link')[0].target = '_blank'
+      document.querySelector('.wrong').innerHTML = "Couldn't find info for this movie! <br><br>But found the wiki link:"
+      document.querySelector('.wrong').style.color = 'red';
+      document.querySelectorAll('.wiki-link')[0].href = data['wiki_link']
+      document.querySelectorAll('.wiki-link')[0].text = data['movie_name']
+      document.querySelectorAll('.wiki-link')[0].target = '_blank'
+
+    } else {
+      document.querySelector('#movie-name-input').value = data['movie_name'];
+      document.querySelector('.div').style.display = 'none';
+      document.querySelector('.budget').textContent = 'Budget: ' + data['budget']
+      document.querySelector('.budget').style.color = 'black';
+      document.querySelector('.box-office').textContent = 'Box Office: ' + data['box-office']
+      document.querySelector('.more-info-text').textContent = "For more information:";
+      document.querySelectorAll('.wiki-link')[0].href = data['wiki_link']
+      document.querySelectorAll('.wiki-link')[0].text = data['movie_name']
+      document.querySelectorAll('.wiki-link')[0].target = '_blank'
 
     }
-      }
+  }
 }
