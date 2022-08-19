@@ -57,7 +57,7 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
 
               document.querySelector('.movies').innerHTML = '';
               document.querySelector('#movie-name-input').value = movieBtn.textContent;
-              fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + movie_link + '&name=' + element)
+              fetch('https://c5r5fokuj3.execute-api.us-east-2.amazonaws.com/movies?url=' + movie_link + '&name=' + movieBtn.textContent)
                 .then(response => response.json())
                 .then(data => {
 
