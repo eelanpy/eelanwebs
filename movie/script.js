@@ -17,7 +17,7 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
   var inputWords = movieName.toLowerCase().replace(/"/g, "").replace(/'/g, "").replace(/\(|_\)/g, "").replace('-',"").replace(')', "").replace(" ","").replace(" ","");
 
   // var result = '';
-  url = 'movies.json'
+  url = 'https://eelanpy1.s3.us-east-2.amazonaws.com/movies.json'
   var matched = []
   fetch(url)
     .then(res => res.json())
