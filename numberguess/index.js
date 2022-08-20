@@ -59,7 +59,7 @@ function letUserPick(num, randomNum) {
 
 
         <div class="text-center">
-         <div class="nums"></div>
+         <div class="nums" id="nums"></div>
         <button class="btn btn-outline-primary submit-btn">Guess!</button>
           
 
@@ -76,23 +76,23 @@ function letUserPick(num, randomNum) {
 
 
   inputBoxDiv.innerHTML = output;
-  location.href = location.href.split('/#userBox')[0] + '#userBox'
+  location.href = location.href.split('#nums')[0] + '#nums'
 
   // document.getElementById("userGuess").focus();
   var nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Delete']
   nums.forEach(element => {
 
-    if(element != 'Delete' ) {
-          document.querySelector('.nums').innerHTML += `<button class="num btn btn-primary m-2 px-3" style="font-size:2rem;">${element}</button>`
+    if (element != 'Delete') {
+      document.querySelector('.nums').innerHTML += `<button class="num btn btn-primary m-2 px-3" style="font-size:2rem;">${element}</button>`
     } else {
-          document.querySelector('.nums').innerHTML += `<button class="delete-btn btn btn-primary m-2 px-3" style="font-size:2rem;">${element}</button>`
+      document.querySelector('.nums').innerHTML += `<button class="delete-btn btn btn-primary m-2 px-3" style="font-size:2rem;">${element}</button>`
     }
   })
   document.querySelector('.delete-btn').style.fontSize = '1rem'
-    document.querySelector('.delete-btn').addEventListener('click', () => {
-  var str = document.querySelector('#userGuess').value;
-  document.querySelector('#userGuess').value = str.slice(0, -1)
-})
+  document.querySelector('.delete-btn').addEventListener('click', () => {
+    var str = document.querySelector('#userGuess').value;
+    document.querySelector('#userGuess').value = str.slice(0, -1)
+  })
 
   document.querySelectorAll('.num').forEach(element => {
     element.addEventListener('click', (e) => {
@@ -196,7 +196,7 @@ function checkUserGuess(randomNum) {
       listElement.innerHTML += '<i class="wrong far fa-times-circle mt-2" style="color: red; font-size:30px;"></i>'
       guessesElement.appendChild(listElement);
     }
-    document.querySelector('input').value =  document.querySelector('#guesses').querySelectorAll('li')[document.querySelector('#guesses').querySelectorAll('li').length - 1].textContent;
+    document.querySelector('input').value = document.querySelector('#guesses').querySelectorAll('li')[document.querySelector('#guesses').querySelectorAll('li').length - 1].textContent;
 
     messageDiv.textContent = `The actual number is higher. Try again!`;
 
@@ -221,12 +221,12 @@ function checkUserGuess(randomNum) {
     }
 
     messageDiv.textContent = `The actual number is lower. Try again!`;
-    document.querySelector('input').value =  document.querySelector('#guesses').querySelectorAll('li')[document.querySelector('#guesses').querySelectorAll('li').length - 1].textContent;
+    document.querySelector('input').value = document.querySelector('#guesses').querySelectorAll('li')[document.querySelector('#guesses').querySelectorAll('li').length - 1].textContent;
 
 
     // document.getElementById("userGuess").focus();
   }
-  if(document.querySelector('.text-success') != null) {
+  if (document.querySelector('.text-success') != null) {
     document.getElementById("userGuess").value = randomNum;
   }
 
