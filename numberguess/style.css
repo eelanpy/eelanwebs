@@ -12,14 +12,20 @@
 .form-signin .form-control {
   position: relative;
   box-sizing: border-box;
-  height: auto;
+  /* height: auto; */
   padding: 10px;
-  font-size: 16px;
+  font-size: 25px;
+}
+
+.form-control::placeholder {
+  font-size: 20px;
 }
 
 .form-signin .form-control:focus {
   z-index: 2;
 }
+
+
 
 li.wrong-num {
   padding: 0;
@@ -64,29 +70,38 @@ input[type="number"]:disabled {
 
 
 .delete-btn {
-    background: #007bff;
-    width: 50px;
-    height: 60px;
-    position: relative;
-    border-radius:5%
+  background: #007bff;
+  width: 50px;
+  height: 60px;
+  position: relative;
+  border-radius: 5%
 }
 
 .icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 50%;
-    transform: translate(-50%, -50%);
-    /* width: 45px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  /* width: 45px;
     height: 20px; */
-    display: block;
-    background: auto;
-      -webkit-filter: brightness(0) invert(1);
+  display: block;
+  background: auto;
+  -webkit-filter: brightness(0) invert(1);
   filter: brightness(0) invert(1);
   font-style: bold;
 }
 
-input:disabled {
-  height: 150%;
-  font-size: 5rem;
+input {
+  font-size: 100%;
+}
+
+input.good-g {
+  border-color: green;
+  color: green;
+}
+
+input.wrong-g {
+  border-color: red;
+  color: red;
 }

@@ -166,6 +166,8 @@ function checkUserGuess(randomNum) {
       listElement.textContent = i;
       if (i == randomNum) {
         listElement.classList.add('correct-num')
+        document.querySelector('input').classList.remove('wrong-g')
+        document.querySelector('input').classList.add('good-g')
         listElement.innerHTML += '<i class="correct far fa-check-circle mt-2" style="color: green; font-size:30px;"></i>'
       }
       else {
@@ -188,7 +190,8 @@ function checkUserGuess(randomNum) {
 
     document.getElementById("userGuess").focus();
   } else if (randomNum > guessed) {
-
+    document.querySelector('input').classList.remove('good-g');
+    document.querySelector('input').classList.add('wrong-g');
     guessed = "";
     messageDiv.classList.add("text-danger");
     for (i of guesses) {
@@ -198,7 +201,10 @@ function checkUserGuess(randomNum) {
       listElement.innerHTML += '<i class="wrong far fa-times-circle mt-2" style="color: red; font-size:30px;"></i>'
       guessesElement.appendChild(listElement);
     }
-    document.querySelector('input').value = "";
+    // setTimeout(() => {
+    //   document.querySelector('input').value = "";
+    // }, 5000)
+
 
     messageDiv.textContent = `The actual number is higher. Try again!`;
 
@@ -212,7 +218,8 @@ function checkUserGuess(randomNum) {
 
     // document.getElementById("userGuess").focus();
   } else {
-
+    document.querySelector('input').classList.remove('good-g');
+    document.querySelector('input').classList.add('wrong-g');
     messageDiv.classList.add("text-danger");
     for (i of guesses) {
       const listElement = document.createElement('li');
@@ -223,7 +230,13 @@ function checkUserGuess(randomNum) {
     }
 
     messageDiv.textContent = `The actual number is lower. Try again!`;
-    document.querySelector('input').value = "";
+
+    // setTimeout(() => {
+    //   document.querySelector('input').value = "";
+    // }, 5000)
+
+
+
 
 
     // document.getElementById("userGuess").focus();
