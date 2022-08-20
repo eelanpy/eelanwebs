@@ -45,13 +45,13 @@ h1 {
   font-family: 'Dongle', sans-serif;
 }
 
-.times-tbl-btns{
+.times-tbl-btns {
   margin-top: 0;
 }
 
 a.btn-outline-info {
   /* margin-top: 5rem; */
-  background-color:  #0dcaf0;
+  background-color: #0dcaf0;
   color: #fff;
   border: 0;
   width: 10rem;
@@ -73,7 +73,9 @@ a.btn-outline-info {
 } */
 
 .btn-outline-secondary {
-  color:#fff;background-color:#6c757d;border-color:#6c757d
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d
 }
 
 
@@ -103,9 +105,9 @@ p {
   margin-left: 20px;
 }
 
-.question{
-font-family: 'Indie Flower', cursive;
-font-size: 2em;
+.question {
+  font-family: 'Indie Flower', cursive;
+  font-size: 2em;
 }
 
 .answer-input {
@@ -154,4 +156,8 @@ input.wrong {
   margin-right: 20px;
   /* margin-right: 490%; */
   font-weight: 900;
+}
+
+input[type="number"]:disabled {
+  background-color: white;
 }

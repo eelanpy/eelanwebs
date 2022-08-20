@@ -99,7 +99,7 @@ function makeQuestions(timeTable) {
   submitBtn.addEventListener('click', function (e) {
     let matched = [];
     for (i of userInputs) {
-
+      i.value = i.value.replace(' ', '')
       if (i.value.length != '') {
 
         matched.push(i.value)
