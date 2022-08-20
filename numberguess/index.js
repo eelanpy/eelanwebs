@@ -6,6 +6,8 @@ buttonsNumsArray.forEach(function (num) {
   output += `<button id=${num} onClick="generateRandomNum(parseInt(${num}))"  class="ms-2 mt-2 p-4 btn btn-outline-primary numbtn" style="font-size: 30px;">${num}</button>`;
 });
 
+
+
 buttonNumsUI.innerHTML += output;
 
 //
@@ -16,8 +18,20 @@ var inputBoxDiv = document.getElementById("userBox");
 //
 // Step 3: The compunter picks a number based on the range from step 1.
 function generateRandomNum(num) {
+
+  document.querySelectorAll('.numbtn').forEach(element => {
+
+    if (element.textContent == num) {
+
+      element.classList.add('btn-primary');
+      element.classList.remove('btn-outline-primary');
+    }
+  });
   guesses = [];
-  randomNum = Math.floor(Math.random() * (num - 1)) + 1;
+  var randomNum = Math.floor(Math.random() * (num - 1)) + 1;
+  if (randomNum % 5 == 0) {
+    console.log(randomNum)
+  }
   return letUserPick(num, randomNum);
 }
 
@@ -34,34 +48,64 @@ function letUserPick(num, randomNum) {
         <h3 id="wrong"></h3>
         <div class="form-signin text-center" style="display: inline-block;">
         
-        <input  class="form-control text-center"
+        <input  class="form-control text-center mb-2"
             type="number" placeholder="Your Number Guess:" id="userGuess"
-            max=${num} min="1"
-        />
+            max=${num} min="1" disabled/>
         
         
 
         
-        </div>
+        </input>
+
+
         <div class="text-center">
-          <button class="btn btn-outline-primary submit-btn">Guess!</button>
+         <div class="nums"></div>
+        <button class="btn btn-outline-primary submit-btn">Guess!</button>
+          
+
+          
         </div>
 
 
         
-    </div><ul id="guesses"></ul>`;
+    </div><ul id="guesses"></ul>`
+
+    ;
 
 
 
 
   inputBoxDiv.innerHTML = output;
-  document.getElementById("userGuess").focus();
+  location.href = location.href.split('/#userBox')[0] + '#userBox'
+
+  // document.getElementById("userGuess").focus();
+  var nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Delete']
+  nums.forEach(element => {
+
+    if(element != 'Delete' ) {
+          document.querySelector('.nums').innerHTML += `<button class="num btn btn-primary m-2 px-3" style="font-size:2rem;">${element}</button>`
+    } else {
+          document.querySelector('.nums').innerHTML += `<button class="delete-btn btn btn-primary m-2 px-3" style="font-size:2rem;">${element}</button>`
+    }
+  })
+  document.querySelector('.delete-btn').style.fontSize = '1rem'
+    document.querySelector('.delete-btn').addEventListener('click', () => {
+  var str = document.querySelector('#userGuess').value;
+  document.querySelector('#userGuess').value = str.slice(0, -1)
+})
+
+  document.querySelectorAll('.num').forEach(element => {
+    element.addEventListener('click', (e) => {
+      document.querySelector('#userGuess').value += element.textContent;
+    })
+  })
   for (var i = 0; i < document.querySelectorAll('.numbtn').length; i++) {
     document.querySelectorAll('.numbtn')[i].disabled = true;
   }
-  document.querySelector('.form-control').addEventListener('keypress', (e) => {
-    if (window.event.keyCode == 13) {
-
+  document.body.addEventListener('keypress', (e) => {
+    e.preventDefault()
+    if (e.keyCode == 13) {
+      location.href = location.href.split('/#userBox')[0].split('#guesses')[0] + '#guesses'
       document.querySelector('.submit-btn').click()
     }
   })
@@ -83,9 +127,12 @@ function letUserPick(num, randomNum) {
   })
 }
 
+
+
 var guesses = [];
 var totalTries = 0;
 function checkUserGuess(randomNum) {
+
   document.getElementById("wrong").textContent = '';
   document.getElementById("wrong").classList.remove('text-danger');
 
@@ -98,7 +145,7 @@ function checkUserGuess(randomNum) {
   guesses2 = new Set(guesses)
 
   guesses = Array.from(guesses2)
-
+  totalTries = guesses.length;
 
 
 
@@ -109,6 +156,7 @@ function checkUserGuess(randomNum) {
   messageDiv.classList.remove("text-danger");
 
   if (randomNum == guessed) {
+
     messageDiv.classList.add("text-success");
     messageDiv.textContent = `Yes you got it!!!  It took you ${totalTries} ${tries}. `;
     for (i of guesses) {
@@ -138,6 +186,7 @@ function checkUserGuess(randomNum) {
 
     document.getElementById("userGuess").focus();
   } else if (randomNum > guessed) {
+
     guessed = "";
     messageDiv.classList.add("text-danger");
     for (i of guesses) {
@@ -147,29 +196,37 @@ function checkUserGuess(randomNum) {
       listElement.innerHTML += '<i class="wrong far fa-times-circle mt-2" style="color: red; font-size:30px;"></i>'
       guessesElement.appendChild(listElement);
     }
-
+    document.querySelector('input').value =  document.querySelector('#guesses').querySelectorAll('li')[document.querySelector('#guesses').querySelectorAll('li').length - 1].textContent;
 
     messageDiv.textContent = `The actual number is higher. Try again!`;
 
-    document.getElementById("userGuess").focus();
-  } else {
-    messageDiv.classList.add("text-danger");
+    // const listElement = document.createElement('li');
+    // listElement.textContent = 'Random Number > ' + guesses[guesses.length - 1];
+    // listElement.classList.add('wrong-num')
+    // listElement.innerHTML += '<i class="wrong far fa-times-circle mt-2" style="color: red; font-size:30px;"></i>'
+    // guessesElement.appendChild(listElement);
 
+
+
+    // document.getElementById("userGuess").focus();
+  } else {
+
+    messageDiv.classList.add("text-danger");
     for (i of guesses) {
       const listElement = document.createElement('li');
-      listElement.classList.add('wrong-num')
       listElement.textContent = i;
-      listElement.innerHTML += '<i class="wrong far fa-times-circle mt-2" style="color: red; font-size:30px;"></i>'
+      listElement.classList.add('wrong-num')
+      listElement.innerHTML += '<i class="far fa-times-times mt-2" style="color: red; font-size:30px;"></i>'
       guessesElement.appendChild(listElement);
     }
 
     messageDiv.textContent = `The actual number is lower. Try again!`;
+    document.querySelector('input').value =  document.querySelector('#guesses').querySelectorAll('li')[document.querySelector('#guesses').querySelectorAll('li').length - 1].textContent;
 
-    document.getElementById("userGuess").focus();
+
+    // document.getElementById("userGuess").focus();
   }
-  if (document.querySelector(".text-success") == null) {
-    document.getElementById("userGuess").value = "";
-  } else {
+  if(document.querySelector('.text-success') != null) {
     document.getElementById("userGuess").value = randomNum;
   }
 
