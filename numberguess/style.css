@@ -41,3 +41,22 @@ li.correct-num {
 i {
   margin-left: 1rem;
 }
+
+/* .form-control {
+  padding:5rem 5rem;
+} */
+input[type="number"]:disabled {
+  background-color: white;
+}
+
+.btn-primary:disabled {
+  background-color: #007bff;
+
+}
+
+/* span {
+  background-color: #007bff;
+  color: black;
+  font-size: 15px;
+
+} */
