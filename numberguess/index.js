@@ -60,7 +60,7 @@ function letUserPick(num, randomNum) {
 
         <div class="text-center">
          <div class="nums" id="nums"></div>
-        <button class="btn btn-outline-primary submit-btn">Guess!</button>
+        <button class="btn btn-outline-primary submit-btn" id="submit">Guess!</button>
           
 
           
@@ -76,18 +76,19 @@ function letUserPick(num, randomNum) {
 
 
   inputBoxDiv.innerHTML = output;
-  location.href = location.href.split('#nums')[0] + '#nums'
+  location.href = location.href.split('#submit')[0] + '#submit'
 
   // document.getElementById("userGuess").focus();
-  var nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Delete']
+  var nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
   nums.forEach(element => {
 
     if (element != 'Delete') {
       document.querySelector('.nums').innerHTML += `<button class="num btn btn-primary m-2 px-3" style="font-size:2rem;">${element}</button>`
-    } else {
-      document.querySelector('.nums').innerHTML += `<button class="delete-btn btn btn-primary m-2 px-3" style="font-size:2rem;">${element}</button>`
-    }
+    } 
   })
+
+      document.querySelector('.nums').innerHTML += `<div class="delete-btn btn btn-primary m-2 px-3" style="font-size:2rem;"><img class="icon" font-size:30px; color: white;" src="close_FILL0_wght400_GRAD0_opsz48.png" /></div>`
+
   document.querySelector('.delete-btn').style.fontSize = '1rem'
   document.querySelector('.delete-btn').addEventListener('click', () => {
     var str = document.querySelector('#userGuess').value;
@@ -105,12 +106,13 @@ function letUserPick(num, randomNum) {
   document.body.addEventListener('keypress', (e) => {
     e.preventDefault()
     if (e.keyCode == 13) {
-      location.href = location.href.split('/#userBox')[0].split('#guesses')[0] + '#guesses'
+      
       document.querySelector('.submit-btn').click()
     }
   })
 
   document.querySelector('.submit-btn').addEventListener('click', (e) => {
+    location.href += '#guesses'
     document.getElementById("wrong").textContent = ''
     if (document.querySelector('.form-control').value != '') {
       checkUserGuess(randomNum)
@@ -196,8 +198,8 @@ function checkUserGuess(randomNum) {
       listElement.innerHTML += '<i class="wrong far fa-times-circle mt-2" style="color: red; font-size:30px;"></i>'
       guessesElement.appendChild(listElement);
     }
-    document.querySelector('input').value = document.querySelector('#guesses').querySelectorAll('li')[document.querySelector('#guesses').querySelectorAll('li').length - 1].textContent;
-
+    document.querySelector('input').value = "";
+    
     messageDiv.textContent = `The actual number is higher. Try again!`;
 
     // const listElement = document.createElement('li');
@@ -221,7 +223,7 @@ function checkUserGuess(randomNum) {
     }
 
     messageDiv.textContent = `The actual number is lower. Try again!`;
-    document.querySelector('input').value = document.querySelector('#guesses').querySelectorAll('li')[document.querySelector('#guesses').querySelectorAll('li').length - 1].textContent;
+    document.querySelector('input').value = "";
 
 
     // document.getElementById("userGuess").focus();
