@@ -30,7 +30,7 @@ function generateRandomNum(num) {
   guesses = [];
   var randomNum = Math.floor(Math.random() * (num - 1)) + 1;
   if (randomNum % 5 == 0) {
-    console.log(randomNum)
+    randomNum = Math.floor(Math.random() * (num - 1)) + 1;
   }
   return letUserPick(num, randomNum);
 }
@@ -84,10 +84,10 @@ function letUserPick(num, randomNum) {
 
     if (element != 'Delete') {
       document.querySelector('.nums').innerHTML += `<button class="num btn btn-primary m-2 px-3" style="font-size:2rem;">${element}</button>`
-    } 
+    }
   })
 
-      document.querySelector('.nums').innerHTML += `<div class="delete-btn btn btn-primary m-2 px-3" style="font-size:2rem;"><img class="icon" font-size:30px; color: white;" src="close_FILL0_wght400_GRAD0_opsz48.png" /></div>`
+  document.querySelector('.nums').innerHTML += `<div class="delete-btn btn btn-primary m-2 px-3" style="font-size:2rem;"><img class="icon" font-size:30px; color: white;" src="close_FILL0_wght400_GRAD0_opsz48.png" /></div>`
 
   document.querySelector('.delete-btn').style.fontSize = '1rem'
   document.querySelector('.delete-btn').addEventListener('click', () => {
@@ -106,7 +106,7 @@ function letUserPick(num, randomNum) {
   document.body.addEventListener('keypress', (e) => {
     e.preventDefault()
     if (e.keyCode == 13) {
-      
+
       document.querySelector('.submit-btn').click()
     }
   })
@@ -199,7 +199,7 @@ function checkUserGuess(randomNum) {
       guessesElement.appendChild(listElement);
     }
     document.querySelector('input').value = "";
-    
+
     messageDiv.textContent = `The actual number is higher. Try again!`;
 
     // const listElement = document.createElement('li');
