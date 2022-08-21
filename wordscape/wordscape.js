@@ -64,6 +64,7 @@ $.getJSON('data.json', function (response) {
   document.querySelector('.btn-outline-primary').addEventListener('click', function () {
     document.querySelector('ul.words').innerHTML = '';
     var matched = []
+    document.querySelector('.input-word').value = document.querySelector('.input-word').value.toLowerCase() 
     if (document.querySelector('.input-word').value.length > 0 && /[a-zA-Z]$/.test(document.querySelector('.input-word').value) == true) {
       const words = response;
 
@@ -88,7 +89,7 @@ $.getJSON('data.json', function (response) {
           return b.length - a.length || b.localeCompare(alert)
         })
         for (word of matched) {
-          document.querySelector('.words').innerHTML += `<li class="word">${matched.length}</li>`
+          document.querySelector('.words').innerHTML += `<li class="word">${word}</li>`
         }
         document.querySelector('.div').style.display = 'none';
       }
