@@ -75,7 +75,7 @@ $.getJSON('data.json', function (response) {
           matched.push(wordsList[i])
           const word = wordsList[i][0].toUpperCase() + wordsList[i].slice(1, wordsList[i].length).toLowerCase();
           console.log(word);
-          document.querySelector('.words').innerHTML += `<li class="word">${word}</li>`
+          document.querySelector('.words').innerHTML += `<li class="word">${titleCase(word)}</li>`
 
         }
 
@@ -89,7 +89,7 @@ $.getJSON('data.json', function (response) {
           return b.length - a.length || b.localeCompare(alert)
         })
         for (word of matched) {
-          document.querySelector('.words').innerHTML += `<li class="word">${word}</li>`
+          document.querySelector('.words').innerHTML += `<li class="word">${titleCase(word)}</li>`
         }
         document.querySelector('.div').style.display = 'none';
       }
@@ -153,3 +153,15 @@ $.getJSON('data.json', function (response) {
   }
 
 });
+
+
+function titleCase(str) {
+  var splitStr = str.toLowerCase().split(' ');
+  for (var i = 0; i < splitStr.length; i++) {
+    // You do not need to check if i is larger than splitStr length, as your for does that for you
+    // Assign it back to the array
+    splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+  }
+  // Directly return the joined string
+  return splitStr.join(' ');
+}
