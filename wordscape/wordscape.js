@@ -88,7 +88,7 @@ $.getJSON('data.json', function (response) {
           return b.length - a.length || b.localeCompare(alert)
         })
         for (word of matched) {
-          document.querySelector('.words').innerHTML += `<li class="word">${word}</li>`
+          document.querySelector('.words').innerHTML += `<li class="word">${matched.length}</li>`
         }
         document.querySelector('.div').style.display = 'none';
       }
