@@ -29,7 +29,7 @@ document.getElementsByClassName('btn')[0].addEventListener('click', (e) => {
           movieName = movieName.replace(" ", "").replace(" ", "")
 
           if (movieName.includes(inputWords) == true) {
-            
+
             matched.push(`<button id=${data[i][j]} class="btn btn-primary movie-btn ml-0">${j}</button>`)
           }
         }
@@ -123,12 +123,7 @@ function capitalize(str) {
 }
 
 function putData(data) {
-  if (data.message) {
-    document.querySelector('.div').style.display = 'none';
-    document.querySelector('.wrong').textContent = "Couldn't find movie!"
-    document.querySelector('.wrong').style.color = 'red';
-
-  } else {
+  try {
     if (data['budget'].toLowerCase().includes('availab') == true && data['box-office'].toLowerCase().includes('availab') == true) {
       document.querySelector('.div').style.display = 'none';
       document.querySelector('#movie-name-input').value = data['movie_name'];
@@ -137,7 +132,6 @@ function putData(data) {
       document.querySelectorAll('.wiki-link')[0].href = data['wiki_link']
       document.querySelectorAll('.wiki-link')[0].text = data['movie_name']
       document.querySelectorAll('.wiki-link')[0].target = '_blank'
-
     } else {
       document.querySelector('#movie-name-input').value = data['movie_name'];
       document.querySelector('.div').style.display = 'none';
@@ -150,5 +144,9 @@ function putData(data) {
       document.querySelectorAll('.wiki-link')[0].target = '_blank'
 
     }
+  } catch {
+    document.querySelector('.div').style.display = 'none';
+    document.querySelector('.wrong').textContent = "Couldn't find info/movie!"
+    document.querySelector('.wrong').style.color = 'red';
   }
 }
