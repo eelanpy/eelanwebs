@@ -117,9 +117,10 @@ function letUserPick(num, randomNum) {
     if (document.querySelector('.form-control').value != '') {
       checkUserGuess(randomNum)
     } else {
+      if (document.querySelectorAll('button')[document.querySelectorAll('button').length - 1].textContent != 'Play Again' ){
       document.getElementById("wrong").textContent = 'Try Again! Reason: You did not put a number.'
       document.getElementById("wrong").classList.add('text-danger')
-
+      }
 
     }
 
