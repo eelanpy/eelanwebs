@@ -244,6 +244,8 @@ function checkUserGuess(randomNum) {
   if (document.querySelector('.text-success') != null) {
     document.getElementById("userGuess").value = randomNum;
   }
+  
+  document.querySelector('input').value = "";
 
 
 
