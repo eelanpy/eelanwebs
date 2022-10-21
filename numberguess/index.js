@@ -112,7 +112,7 @@ function letUserPick(num, randomNum) {
   })
 
   document.querySelector('.submit-btn').addEventListener('click', (e) => {
-    location.href = location.href.split('#guesses')[0] + '#guesses'
+    location.href = location.href.split('#guesses')[0].split('#submit')[0] + '#guesses'
     document.getElementById("wrong").textContent = ''
     if (document.querySelector('.form-control').value != '') {
       checkUserGuess(randomNum)
