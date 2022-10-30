@@ -89,7 +89,7 @@ function makeQuestions(timeTable) {
   for (let i = 0; i < questionsRandomList.length; i++) {
     const questionRow = document.createElement('tr');
     const numberQtn = i + 1;
-    questionRow.innerHTML = '<td class="question">' + '<span>' + numberQtn + ') </span>' + timeTable + '</td> <td class="question">X </td> <td class="question">' + questionsRandomList[i] + '</td> <td class="question">= </td>' + '<td><input min=0 max=144 class="form-control answer-input" type="number" pattern="[0-9]*"></td><td class="markAnswer"></td><td class="correct-ans"></td>'
+    questionRow.innerHTML = '<td class="question">' + '<span>' + numberQtn + ') </span>' + timeTable + '</td> <td class="question">X </td> <td class="question">' + questionsRandomList[i] + '</td> <td class="question">= </td>' + '<td><input min=0 max=144 class="form-control answer-input" type="number" pattern="\d*"></td><td class="markAnswer"></td><td class="correct-ans"></td>'
     questionsTable.appendChild(questionRow);
   }
 
